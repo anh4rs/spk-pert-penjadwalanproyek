@@ -84,13 +84,13 @@
 include('fungsi_koneksi.php');
 include('fungsi_tanggalindo.php');
 include "fungsi_enc_dec.php";
-session_start();
-$username = mysql_real_escape_string($_POST['username']);
-$password = mysql_real_escape_string(md5($_POST['password']));
 
-$query_userportal = mysql_query("select * from tbl_admin where username='$username' and password='$password' and status='1'");
-if(mysql_num_rows($query_userportal)==1){ //jika berhasil akan bernilai 1
-	$data_userportal = mysql_fetch_array($query_userportal);
+$username = $_POST['username'];
+$password = md5($_POST['password']);
+
+$query_userportal = mysqli_query($con, "select * from tbl_admin where username='$username' and password='$password' and status='1'");
+if(mysqli_num_rows($query_userportal)==1){ //jika berhasil akan bernilai 1
+	$data_userportal = mysqli_fetch_array($query_userportal);
 	$_SESSION['username'] = $data_userportal['username'];
 	$_SESSION['password'] = $data_userportal['password'];
 }
@@ -111,7 +111,7 @@ if (!isset($_SESSION['username']) || $status=='0') {
 						</strong>  
                             </div>
                             <div class="panel-body">
-                                <form role="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                                <form role="form" method="post" action="index.php">
                                        <br />
                                      <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-tag"  ></i></span>

@@ -46,9 +46,9 @@
                                     </thead>
                                     <tbody>
 									<?php 
-									$query = mysql_query("SELECT * FROM tbl_jaringankerja left join tbl_project on tbl_project.kode_project=tbl_jaringankerja.kode_project order by id_jaringankerja ASC");
+									$query = mysqli_query($con, "SELECT * FROM tbl_jaringankerja left join tbl_project on tbl_project.kode_project=tbl_jaringankerja.kode_project order by id_jaringankerja ASC");
 									$no = 1;
-									while ($data = mysql_fetch_array($query)){
+									while ($data = mysqli_fetch_array($query)){
 									?>
                                         <tr class="odd gradeX">
                                             <td style="vertical-align:middle;text-align:center;"><?php echo $no;?></td>
@@ -59,8 +59,8 @@
 											<?php 
 											$urutan_kegiatan_explode = explode(',',$data['urutan_kegiatan']); 
 											$urutan_kegiatan_implode = "'".implode("','",$urutan_kegiatan_explode)."'";
-											$query_kegiatan = mysql_query("SELECT * FROM tbl_kegiatan where kode_kegiatan IN($urutan_kegiatan_implode)");
-											while ($data_kegiatan = mysql_fetch_array($query_kegiatan)){
+											$query_kegiatan = mysqli_query($con, "SELECT * FROM tbl_kegiatan where kode_kegiatan IN($urutan_kegiatan_implode)");
+											while ($data_kegiatan = mysqli_fetch_array($query_kegiatan)){
 												echo "<li>$data_kegiatan[nama_kegiatan]</li>";
 											}
 											?>

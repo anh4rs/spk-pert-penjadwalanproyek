@@ -16,7 +16,7 @@
                             ID : 
 							<?php
 							$kode_kegiatan = $_GET['id'];
-							$query_data = mysql_fetch_array(mysql_query("select * from tbl_kegiatan where kode_kegiatan='$kode_kegiatan'"));
+							$query_data = mysqli_fetch_array(mysqli_query($con, "select * from tbl_kegiatan where kode_kegiatan='$kode_kegiatan'"));
 							$kode_kegiatan = $query_data['kode_kegiatan'];
 							echo $kode_kegiatan;?>
 							</td>
@@ -37,10 +37,10 @@
 							<label class="control-label col-lg-4">NAMA PROJECT</label>
 							<div class="col-lg-8">
 								<select class="form-control chzn-select" name="kode_project">
-										<?php $query_data_project = mysql_fetch_array(mysql_query("select * from tbl_project where kode_project='$query_data[kode_project]'"));?>
+										<?php $query_data_project = mysqli_fetch_array(mysqli_query($con, "select * from tbl_project where kode_project='$query_data[kode_project]'"));?>
 											<option value="<?php echo $query_data_project['kode_project'];?>"><?php echo $query_data_project['nama_project'];?></option>
-										<?php $query_project = mysql_query("select * from tbl_project where kode_project !='$query_data[kode_project]' order by nama_project ASC");
-										while($data_project = mysql_fetch_array($query_project)){
+										<?php $query_project = mysqli_query($con, "select * from tbl_project where kode_project !='$query_data[kode_project]' order by nama_project ASC");
+										while($data_project = mysqli_fetch_array($query_project)){
 										?>	
 											<option value="<?php echo $data_project['kode_project'];?>"><?php echo $data_project['nama_project'];?></option>
 										<?php } ?>

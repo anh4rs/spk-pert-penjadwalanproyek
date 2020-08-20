@@ -5,7 +5,7 @@ $updater = $_SESSION['username'];
 	switch($_GET['act']){
 		case 'add':
 			$password = md5($_POST['password']);
-			mysql_query("INSERT INTO tbl_admin SET 
+			mysqli_query($con, "INSERT INTO tbl_admin SET 
 			nama_lengkap				= '$_POST[nama_lengkap]',
 			username					= '$_POST[username]',
 			password					= '$password',
@@ -18,7 +18,7 @@ $updater = $_SESSION['username'];
 			$id_admin = $_POST['id_admin'];
 			$new_password = md5($_POST['password']);
 			
-			$query_data = mysql_fetch_array(mysql_query("select * from tbl_admin where id_admin='$id_admin'"));
+			$query_data = mysqli_fetch_array(mysqli_query($con, "select * from tbl_admin where id_admin='$id_admin'"));
 			$old_password = $query_data['password'];
 			
 			if($_POST['password']==$old_password){
@@ -27,7 +27,7 @@ $updater = $_SESSION['username'];
 				$password = $new_password;
 			}
 			
-			mysql_query("UPDATE tbl_admin SET 
+			mysqli_query($con, "UPDATE tbl_admin SET 
 			nama_lengkap				= '$_POST[nama_lengkap]',
 			username					= '$_POST[username]',
 			password					= '$password',
@@ -38,7 +38,7 @@ $updater = $_SESSION['username'];
 			echo "<meta http-equiv='refresh' content='0;url=?pert=tbl_admin'>";			
 		break;
 		case 'delete':
-			mysql_query("DELETE FROM tbl_admin WHERE id_admin = '$_GET[id]'");
+			mysqli_query($con, "DELETE FROM tbl_admin WHERE id_admin = '$_GET[id]'");
 			echo "<meta http-equiv='refresh' content='0;url=?pert=tbl_admin'>";
 		break;
 	}

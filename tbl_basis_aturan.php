@@ -17,7 +17,7 @@
 							$filtername = "Filter Nama Project";
 							$filter = "";
 							if($_GET['filter']){
-								$query_data_project = mysql_fetch_array(mysql_query("SELECT * FROM tbl_project where kode_project='$_GET[filter]'"));
+								$query_data_project = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM tbl_project where kode_project='$_GET[filter]'"));
 								$filtername = "$query_data_project[nama_project]";
 								$filter = "and tbl_kegiatan.kode_project='$query_data_project[kode_project]'";
 							}
@@ -26,8 +26,8 @@
 							<select name="formc" onchange="location = this.value;" class="form-control">
 								<option value=""><?php echo $filtername;?></option>
 								<?php 
-								$query_project = mysql_query("SELECT * FROM tbl_project where kode_project!='$query_data_project[kode_project]' order by nama_project ASC");
-								while($data_project = mysql_fetch_array($query_project)){
+								$query_project = mysqli_query($con, "SELECT * FROM tbl_project where kode_project!='$query_data_project[kode_project]' order by nama_project ASC");
+								while($data_project = mysqli_fetch_array($query_project)){
 									echo "<option value='?pert=tbl_basis_aturan&filter=$data_project[kode_project]'>$data_project[nama_project]</option>";
 								}
 								?>
@@ -55,23 +55,23 @@
                                     </thead>
                                     <tbody>
 									<?php 
-									$query = mysql_query("SELECT * FROM tbl_basis_aturan, tbl_kegiatan where tbl_kegiatan.kode_kegiatan=tbl_basis_aturan.kode_kegiatan $filter order by id_basis ASC");
+									$query = mysqli_query($con, "SELECT * FROM tbl_basis_aturan, tbl_kegiatan where tbl_kegiatan.kode_kegiatan=tbl_basis_aturan.kode_kegiatan $filter order by id_basis ASC");
 									$no = 1;
-									while ($data = mysql_fetch_array($query)){
+									while ($data = mysqli_fetch_array($query)){
 									?>
                                         <tr class="odd gradeX">
                                             <td><?php echo $no;?></td>
 											<td><?php 
-											$query_data_project_show = mysql_fetch_array(mysql_query("SELECT * FROM tbl_project where kode_project='$data[kode_project]'"));
+											$query_data_project_show = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM tbl_project where kode_project='$data[kode_project]'"));
 												echo $query_data_project_show['nama_project'];
 											?></td>
                                             <td><?php echo $data['nama_kegiatan'];?></td>
                                             <td><?php 
-											$query_data = mysql_fetch_array(mysql_query("SELECT * FROM tbl_kegiatan where kode_kegiatan='$data[kegiatan_sebelumnya]'"));
+											$query_data = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM tbl_kegiatan where kode_kegiatan='$data[kegiatan_sebelumnya]'"));
 												echo $query_data['nama_kegiatan'];
 											?></td>
                                             <td><?php 
-											$query_data = mysql_fetch_array(mysql_query("SELECT * FROM tbl_kegiatan where kode_kegiatan='$data[kegiatan_setelahnya]'"));
+											$query_data = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM tbl_kegiatan where kode_kegiatan='$data[kegiatan_setelahnya]'"));
 												echo $query_data['nama_kegiatan'];
 											?></td>
                                             <td class="center" width="50px">

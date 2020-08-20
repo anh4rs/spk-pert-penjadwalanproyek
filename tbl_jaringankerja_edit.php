@@ -16,7 +16,7 @@
                             ID : 
 							<?php
 							$id_jaringankerja = $_GET['id'];
-							$query_data = mysql_fetch_array(mysql_query("select * from tbl_jaringankerja where id_jaringankerja = '$id_jaringankerja'"));
+							$query_data = mysqli_fetch_array(mysqli_query($con, "select * from tbl_jaringankerja where id_jaringankerja = '$id_jaringankerja'"));
 							$id_jaringankerja = $query_data['id_jaringankerja'];
 							echo $id_jaringankerja;?>
 							</td>
@@ -35,9 +35,9 @@
 								<input type="hidden" name="id_jaringankerja" value="<?php echo $id_jaringankerja;?>">
 								<select name="formc" onchange="location = this.value;" class="form-control">
 									<?php 
-										$query_data_project = mysql_fetch_array(mysql_query("select * from tbl_project where kode_project='$query_data[kode_project]'"));
-										$hitung_jumlah_kegiatan = mysql_fetch_array(mysql_query("select count(*) as counter from tbl_basis_aturan,tbl_kegiatan where tbl_basis_aturan.kode_kegiatan=tbl_kegiatan.kode_kegiatan and kode_project='$query_data[kode_project]'"));
-										$hitung_jumlah_kegiatan_double = mysql_fetch_array(mysql_query("select count(*) as counter from tbl_basis_aturan where id_basis IN(select id_basis from tbl_basis_aturan,tbl_kegiatan where tbl_basis_aturan.kode_kegiatan=tbl_kegiatan.kode_kegiatan and kode_project='$query_data[kode_project]' group by kegiatan_sebelumnya HAVING COUNT(kegiatan_sebelumnya) >1)"));
+										$query_data_project = mysqli_fetch_array(mysqli_query($con, "select * from tbl_project where kode_project='$query_data[kode_project]'"));
+										$hitung_jumlah_kegiatan = mysqli_fetch_array(mysqli_query($con, "select count(*) as counter from tbl_basis_aturan,tbl_kegiatan where tbl_basis_aturan.kode_kegiatan=tbl_kegiatan.kode_kegiatan and kode_project='$query_data[kode_project]'"));
+										$hitung_jumlah_kegiatan_double = mysqli_fetch_array(mysqli_query($con, "select count(*) as counter from tbl_basis_aturan where id_basis IN(select id_basis from tbl_basis_aturan,tbl_kegiatan where tbl_basis_aturan.kode_kegiatan=tbl_kegiatan.kode_kegiatan and kode_project='$query_data[kode_project]' group by kegiatan_sebelumnya HAVING COUNT(kegiatan_sebelumnya) >1)"));
 										$jumlahjaringan = $hitung_jumlah_kegiatan['counter']-$hitung_jumlah_kegiatan_double['counter'];
 										echo "<option value=''>$query_data_project[nama_project]</option>";
 									?>
@@ -64,8 +64,8 @@
 										<?php
 										$urutan_kegiatan_explode = explode(',',$query_data['urutan_kegiatan']); 
 										$urutan_kegiatan_implode = "'".implode("','",$urutan_kegiatan_explode)."'";
-										$query_kegiatan = mysql_query("SELECT * FROM tbl_kegiatan where kode_kegiatan IN($urutan_kegiatan_implode)");
-										while ($data_kegiatan = mysql_fetch_array($query_kegiatan)){?>	
+										$query_kegiatan = mysqli_query($con, "SELECT * FROM tbl_kegiatan where kode_kegiatan IN($urutan_kegiatan_implode)");
+										while ($data_kegiatan = mysqli_fetch_array($query_kegiatan)){?>	
 											<option value="<?php echo ceil($data_kegiatan['waktuselesai_perkiraan']).",".$data_kegiatan['kode_kegiatan'];?>"><?php echo $data_kegiatan['nama_kegiatan'];?></option>
 										<?php } ?>
 								</select>

@@ -1,10 +1,16 @@
 <?php
 $server = "localhost";
-$username = "mule7148_proyekpert";
-$password = "proyekpert";
+$username = "root";
+$password = "";
 $database = "mule7148_proyekpert";
 
 // Koneksi dan memilih database di server
-mysql_connect($server,$username,$password) or die("Koneksi gagal");
-mysql_select_db($database) or die("Database tidak bisa dibuka");
+$con = mysqli_connect($server,$username,$password, $database);
+if (!$con) {
+    echo "Error: Unable to connect to MySQL." . PHP_EOL;
+    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    exit;
+}
+session_start();
 ?>

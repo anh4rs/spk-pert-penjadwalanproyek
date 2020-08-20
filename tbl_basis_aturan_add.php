@@ -26,13 +26,13 @@
 								<select name="formc" onchange="location = this.value;" class="form-control">
 									<?php 
 									if($_GET['kode_project']){
-										$query_data_project = mysql_fetch_array(mysql_query("select * from tbl_project where kode_project='$_GET[kode_project]'"));
+										$query_data_project = mysqli_fetch_array(mysqli_query($con, "select * from tbl_project where kode_project='$_GET[kode_project]'"));
 										echo "<option value=''>$query_data_project[nama_project]</option>";
 									}else{
 										echo "<option value=''>Pilih Nama Project</option>";
 									}	
-									 $query_project = mysql_query("select * from tbl_project order by nama_project ASC");
-										while($data_project = mysql_fetch_array($query_project)){
+									 $query_project = mysqli_query($con, "select * from tbl_project order by nama_project ASC");
+										while($data_project = mysqli_fetch_array($query_project)){
 										?>	
 											<option value="?pert=tbl_basis_aturan_add&kode_project=<?php echo $data_project['kode_project'];?>"><?php echo $data_project['nama_project'];?></option>
 										<?php } ?>
@@ -44,8 +44,8 @@
 							<div class="col-lg-8">
 								<select class="form-control chzn-select" name="kode_kegiatan">
 									<option value="">Pilih Nama Kegiatan</option>
-										<?php $query_kegiatan = mysql_query("select * from tbl_kegiatan where kode_project='$_GET[kode_project]' order by id_kegiatan ASC");
-										while($data_kegiatan = mysql_fetch_array($query_kegiatan)){
+										<?php $query_kegiatan = mysqli_query($con, "select * from tbl_kegiatan where kode_project='$_GET[kode_project]' order by id_kegiatan ASC");
+										while($data_kegiatan = mysqli_fetch_array($query_kegiatan)){
 										?>	
 											<option value="<?php echo $data_kegiatan['kode_kegiatan'];?>"><?php echo $data_kegiatan['nama_kegiatan'];?></option>
 										<?php } ?>
@@ -57,8 +57,8 @@
 							<div class="col-lg-8">
 								<select class="form-control chzn-select" name="kegiatan_sebelumnya">
 									<option value="">Tidak Ada</option>
-										<?php $query_kegiatan = mysql_query("select * from tbl_kegiatan  where kode_project='$_GET[kode_project]' order by id_kegiatan ASC");
-										while($data_kegiatan = mysql_fetch_array($query_kegiatan)){
+										<?php $query_kegiatan = mysqli_query($con, "select * from tbl_kegiatan  where kode_project='$_GET[kode_project]' order by id_kegiatan ASC");
+										while($data_kegiatan = mysqli_fetch_array($query_kegiatan)){
 										?>	
 											<option value="<?php echo $data_kegiatan['kode_kegiatan'];?>"><?php echo $data_kegiatan['nama_kegiatan'];?></option>
 										<?php } ?>
@@ -70,8 +70,8 @@
 							<div class="col-lg-8">
 								<select class="form-control chzn-select" name="kegiatan_setelahnya">
 									<option value="">Tidak Ada</option>
-										<?php $query_kegiatan = mysql_query("select * from tbl_kegiatan  where kode_project='$_GET[kode_project]' order by id_kegiatan ASC");
-										while($data_kegiatan = mysql_fetch_array($query_kegiatan)){
+										<?php $query_kegiatan = mysqli_query($con, "select * from tbl_kegiatan  where kode_project='$_GET[kode_project]' order by id_kegiatan ASC");
+										while($data_kegiatan = mysqli_fetch_array($query_kegiatan)){
 										?>	
 											<option value="<?php echo $data_kegiatan['kode_kegiatan'];?>"><?php echo $data_kegiatan['nama_kegiatan'];?></option>
 										<?php } ?>

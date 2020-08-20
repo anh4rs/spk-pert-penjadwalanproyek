@@ -7,7 +7,7 @@ $updater = $_SESSION['username'];
 			$jumlahjaringan = $_POST['jumlahjaringan'];
 			$id_jaringankerja = $_POST['id_jaringankerja'];
 			
-			mysql_query("INSERT INTO tbl_jaringankerja SET 
+			mysqli_query($con, "INSERT INTO tbl_jaringankerja SET 
 			id_jaringankerja		= '$id_jaringankerja',
 			kode_project			= '$_POST[kode_project]',
 			nama_jalur				= '$_POST[nama_jalur]',
@@ -18,13 +18,13 @@ $updater = $_SESSION['username'];
 				$jaringan_[$v] = explode(",",$_POST['jaringan_'.$v]);
 				$jaringan0 = $jaringan_[$v][0];
 				$jaringan1 = $jaringan_[$v][1];
-				mysql_query("UPDATE tbl_jaringankerja SET jaringan_$v = '$jaringan0' 
+				mysqli_query($con, "UPDATE tbl_jaringankerja SET jaringan_$v = '$jaringan0' 
 				where id_jaringankerja = '$id_jaringankerja'");
 				$urutan_kegiatan[$v] = $jaringan1;
 				$array_urutan_kegiatan = implode(",",$urutan_kegiatan);
 			}
 			
-			mysql_query("UPDATE tbl_jaringankerja SET urutan_kegiatan = '$array_urutan_kegiatan' 
+			mysqli_query($con, "UPDATE tbl_jaringankerja SET urutan_kegiatan = '$array_urutan_kegiatan' 
 			where id_jaringankerja = '$id_jaringankerja'");
 			
 			echo "<meta http-equiv='refresh' content='0;url=?pert=tbl_jaringankerja'>";
@@ -33,7 +33,7 @@ $updater = $_SESSION['username'];
 			$jumlahjaringan = $_POST['jumlahjaringan'];
 			$id_jaringankerja = $_POST['id_jaringankerja'];
 			
-			mysql_query("UPDATE tbl_jaringankerja SET 
+			mysqli_query($con, "UPDATE tbl_jaringankerja SET 
 			kode_project			= '$_POST[kode_project]',
 			nama_jalur				= '$_POST[nama_jalur]',
 			updated					= '$updated',
@@ -45,19 +45,19 @@ $updater = $_SESSION['username'];
 				$jaringan_[$v] = explode(",",$_POST['jaringan_'.$v]);
 				$jaringan0 = $jaringan_[$v][0];
 				$jaringan1 = $jaringan_[$v][1];
-				mysql_query("UPDATE tbl_jaringankerja SET jaringan_$v = '$jaringan0' 
+				mysqli_query($con, "UPDATE tbl_jaringankerja SET jaringan_$v = '$jaringan0' 
 				where id_jaringankerja = '$id_jaringankerja'");
 				$urutan_kegiatan[$v] = $jaringan1;
 				$array_urutan_kegiatan = implode(",",$urutan_kegiatan);
 			}
 			
-			mysql_query("UPDATE tbl_jaringankerja SET urutan_kegiatan = '$array_urutan_kegiatan' 
+			mysqli_query($con, "UPDATE tbl_jaringankerja SET urutan_kegiatan = '$array_urutan_kegiatan' 
 			where id_jaringankerja = '$id_jaringankerja'");
 			
 			echo "<meta http-equiv='refresh' content='0;url=?pert=tbl_jaringankerja'>";			
 		break;
 		case 'delete':
-			mysql_query("DELETE FROM tbl_jaringankerja WHERE id_jaringankerja = '$_GET[id]'");
+			mysqli_query($con, "DELETE FROM tbl_jaringankerja WHERE id_jaringankerja = '$_GET[id]'");
 			echo "<meta http-equiv='refresh' content='0;url=?pert=tbl_jaringankerja'>";
 		break;
 	}

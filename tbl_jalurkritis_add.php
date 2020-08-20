@@ -15,13 +15,13 @@
 							<td width="50%" align="right" >
                            ID : 
 							<?php
-							$query_data = mysql_fetch_array(mysql_query("select id_jalurkritis from tbl_jalurkritis order by id_jalurkritis DESC limit 1"));
+							$query_data = mysqli_fetch_array(mysqli_query($con, "select id_jalurkritis from tbl_jalurkritis order by id_jalurkritis DESC limit 1"));
 							$id_jalurkritis = $query_data['id_jalurkritis']+1;
 							echo $id_jalurkritis;
-							$query_data_jaringan = mysql_fetch_array(mysql_query("SELECT nama_jalur,urutan_kegiatan,jaringan_1+jaringan_2+jaringan_3+jaringan_4+jaringan_5+jaringan_6+jaringan_7+jaringan_8+jaringan_9+jaringan_10 as Summary FROM tbl_jaringankerja where kode_project='$_GET[kode_project]' order by Summary DESC limit 1"));
+							$query_data_jaringan = mysqli_fetch_array(mysqli_query($con, "SELECT nama_jalur,urutan_kegiatan,jaringan_1+jaringan_2+jaringan_3+jaringan_4+jaringan_5+jaringan_6+jaringan_7+jaringan_8+jaringan_9+jaringan_10 as Summary FROM tbl_jaringankerja where kode_project='$_GET[kode_project]' order by Summary DESC limit 1"));
 							$urutan_kegiatan_explode = explode(',',$query_data_jaringan['urutan_kegiatan']); 
 							$urutan_kegiatan_implode = "'".implode("','",$urutan_kegiatan_explode)."'";
-							$query_data_kegiatan = mysql_fetch_array(mysql_query("select sum(waktuselesai_optimis) as earliest_start, sum(waktuselesai_pesimis) as latest_finish from tbl_kegiatan where kode_kegiatan IN($urutan_kegiatan_implode)"));
+							$query_data_kegiatan = mysqli_fetch_array(mysqli_query($con, "select sum(waktuselesai_optimis) as earliest_start, sum(waktuselesai_pesimis) as latest_finish from tbl_kegiatan where kode_kegiatan IN($urutan_kegiatan_implode)"));
 							?>
 							</td>
 						</tr>
@@ -41,16 +41,16 @@
 								<select name="formc" onchange="location = this.value;" class="form-control">
 									<?php 
 									if($_GET['kode_project']){
-										$query_data_project = mysql_fetch_array(mysql_query("select * from tbl_project where kode_project='$_GET[kode_project]'"));
-										$hitung_jumlah_kegiatan = mysql_fetch_array(mysql_query("select count(*) as counter from tbl_basis_aturan,tbl_kegiatan where tbl_basis_aturan.kode_kegiatan=tbl_kegiatan.kode_kegiatan and kode_project='$_GET[kode_project]'"));
-										$hitung_jumlah_kegiatan_double = mysql_fetch_array(mysql_query("select count(*) as counter from tbl_basis_aturan where id_basis IN(select id_basis from tbl_basis_aturan,tbl_kegiatan where tbl_basis_aturan.kode_kegiatan=tbl_kegiatan.kode_kegiatan and kode_project='$_GET[kode_project]' group by kegiatan_sebelumnya HAVING COUNT(kegiatan_sebelumnya) >1)"));
+										$query_data_project = mysqli_fetch_array(mysqli_query($con, "select * from tbl_project where kode_project='$_GET[kode_project]'"));
+										$hitung_jumlah_kegiatan = mysqli_fetch_array(mysqli_query($con, "select count(*) as counter from tbl_basis_aturan,tbl_kegiatan where tbl_basis_aturan.kode_kegiatan=tbl_kegiatan.kode_kegiatan and kode_project='$_GET[kode_project]'"));
+										$hitung_jumlah_kegiatan_double = mysqli_fetch_array(mysqli_query($con, "select count(*) as counter from tbl_basis_aturan where id_basis IN(select id_basis from tbl_basis_aturan,tbl_kegiatan where tbl_basis_aturan.kode_kegiatan=tbl_kegiatan.kode_kegiatan and kode_project='$_GET[kode_project]' group by kegiatan_sebelumnya HAVING COUNT(kegiatan_sebelumnya) >1)"));
 										$jumlahjaringan = $hitung_jumlah_kegiatan['counter']-$hitung_jumlah_kegiatan_double['counter'];
 										echo "<option value=''>$query_data_project[nama_project]</option>";
 									}else{
 										echo "<option value=''>Pilih Nama Project</option>";
 									}	
-									 $query_project = mysql_query("select * from tbl_project where kode_project!='$_GET[kode_project]' order by nama_project ASC");
-										while($data_project = mysql_fetch_array($query_project)){
+									 $query_project = mysqli_query($con, "select * from tbl_project where kode_project!='$_GET[kode_project]' order by nama_project ASC");
+										while($data_project = mysqli_fetch_array($query_project)){
 										?>	
 											<option value="?pert=tbl_jalurkritis_add&kode_project=<?php echo $data_project['kode_project'];?>"><?php echo $data_project['nama_project'];?></option>
 										<?php } ?>

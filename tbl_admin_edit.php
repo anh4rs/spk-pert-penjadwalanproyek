@@ -16,7 +16,7 @@
                             ID : 
 							<?php
 							$id_admin = $_GET['id'];
-							$query_data = mysql_fetch_array(mysql_query("select * from tbl_admin where id_admin='$id_admin'"));
+							$query_data = mysqli_fetch_array(mysqli_query($con, "select * from tbl_admin where id_admin='$id_admin'"));
 							$id_admin = $query_data['id_admin'];
 							echo $id_admin;?>
 							</td>

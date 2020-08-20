@@ -16,7 +16,7 @@
 							<?php
 							$filtername = "Filter Nama Project";
 							if($_GET['filter']){
-								$query_project = mysql_fetch_array(mysql_query("SELECT * FROM tbl_project where kode_project='$_GET[filter]'"));
+								$query_project = mysqli_fetch_array(mysqli_query($con, "SELECT * FROM tbl_project where kode_project='$_GET[filter]'"));
 								$filtername = "$query_project[nama_project]";
 							}
 							?>
@@ -24,8 +24,8 @@
 							<select name="formc" onchange="location = this.value;" class="form-control">
 								<option value=""><?php echo $filtername;?></option>
 								<?php 
-								$query_project = mysql_query("SELECT * FROM tbl_project order by nama_project ASC");
-								while($data_project = mysql_fetch_array($query_project)){
+								$query_project = mysqli_query($con, "SELECT * FROM tbl_project order by nama_project ASC");
+								while($data_project = mysqli_fetch_array($query_project)){
 									echo "<option value='?pert=tbl_kegiatan&filter=$data_project[kode_project]'>$data_project[nama_project]</option>";
 								}
 								?>
@@ -64,9 +64,9 @@
 									if($_GET['filter']){
 										$filter = "where tbl_kegiatan.kode_project='$_GET[filter]'";
 									}
-									$query = mysql_query("SELECT * FROM tbl_kegiatan left join tbl_project on tbl_project.kode_project=tbl_kegiatan.kode_project $filter order by id_kegiatan ASC");
+									$query = mysqli_query($con, "SELECT * FROM tbl_kegiatan left join tbl_project on tbl_project.kode_project=tbl_kegiatan.kode_project $filter order by id_kegiatan ASC");
 									$no = 1;
-									while ($data = mysql_fetch_array($query)){
+									while ($data = mysqli_fetch_array($query)){
 									?>
                                         <tr class="odd gradeX">
                                             <td style="vertical-align:middle;text-align:right;"><?php echo $no;?></td>

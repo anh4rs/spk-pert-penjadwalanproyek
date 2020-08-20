@@ -15,7 +15,7 @@
 							<td width="50%" align="right" >
                             ID : 
 							<?php
-							$query_data = mysql_fetch_array(mysql_query("select kode_kegiatan from tbl_kegiatan order by kode_kegiatan DESC limit 1"));
+							$query_data = mysqli_fetch_array(mysqli_query($con, "select kode_kegiatan from tbl_kegiatan order by kode_kegiatan DESC limit 1"));
 							$kode_kegiatan = sprintf("%09d",(substr($query_data['kode_kegiatan'],-9))+1);
 							echo $kode_kegiatan;?>
 							</td>
@@ -37,8 +37,8 @@
 							<div class="col-lg-8">
 								<select class="form-control chzn-select" name="kode_project">
 									<option value="">Pilih Nama Project</option>
-										<?php $query_project = mysql_query("select * from tbl_project order by nama_project ASC");
-										while($data_project = mysql_fetch_array($query_project)){
+										<?php $query_project = mysqli_query($con, "select * from tbl_project order by nama_project ASC");
+										while($data_project = mysqli_fetch_array($query_project)){
 										?>	
 											<option value="<?php echo $data_project['kode_project'];?>"><?php echo $data_project['nama_project'];?></option>
 										<?php } ?>

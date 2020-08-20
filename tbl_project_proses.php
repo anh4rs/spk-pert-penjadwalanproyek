@@ -4,7 +4,7 @@ $updater = $_SESSION['username'];
 	include "fungsi_koneksi.php";
 	switch($_GET['act']){
 		case 'add':
-			mysql_query("INSERT INTO tbl_project SET 
+			mysqli_query($con, "INSERT INTO tbl_project SET 
 			kode_project				= '$_POST[kode_project]',
 			nama_project				= '$_POST[nama_project]',
 			updated						= '$updated',
@@ -12,7 +12,7 @@ $updater = $_SESSION['username'];
 			echo "<meta http-equiv='refresh' content='0;url=?pert=tbl_project'>";
 		break;
 		case 'edit':
-			mysql_query("UPDATE tbl_project SET 
+			mysqli_query($con, "UPDATE tbl_project SET 
 			nama_project				= '$_POST[nama_project]',
 			updated						= '$updated',
 			updater						= '$updater'
@@ -20,7 +20,7 @@ $updater = $_SESSION['username'];
 			echo "<meta http-equiv='refresh' content='0;url=?pert=tbl_project'>";			
 		break;
 		case 'delete':
-			mysql_query("DELETE FROM tbl_project WHERE kode_project = '$_GET[id]'");
+			mysqli_query($con, "DELETE FROM tbl_project WHERE kode_project = '$_GET[id]'");
 			echo "<meta http-equiv='refresh' content='0;url=?pert=tbl_project'>";
 		break;
 	}

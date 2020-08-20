@@ -16,7 +16,7 @@
                             ID : 
 							<?php
 							$kode_project = $_GET['id'];
-							$query_data = mysql_fetch_array(mysql_query("select * from tbl_project where kode_project='$kode_project'"));
+							$query_data = mysqli_fetch_array(mysqli_query($con, "select * from tbl_project where kode_project='$kode_project'"));
 							$kode_project = $query_data['kode_project'];
 							echo $kode_project;?>
 							</td>

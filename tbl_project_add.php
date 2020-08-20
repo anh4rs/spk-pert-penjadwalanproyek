@@ -15,7 +15,7 @@
 							<td width="50%" align="right" >
                             ID : 
 							<?php
-							$query_data = mysql_fetch_array(mysql_query("select kode_project from tbl_project order by kode_project DESC limit 1"));
+							$query_data = mysqli_fetch_array(mysqli_query($con, "select kode_project from tbl_project order by kode_project DESC limit 1"));
 							$kode_project = sprintf("%07d",(substr($query_data['kode_project'],-7))+1);
 							echo $kode_project;?>
 							</td>

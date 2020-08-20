@@ -31,9 +31,9 @@
                                     </thead>
                                     <tbody>
 									<?php 
-									$query = mysql_query("SELECT * FROM tbl_project order by id_project ASC");
+									$query = mysqli_query($con, "SELECT * FROM tbl_project order by id_project ASC");
 									$no = 1;
-									while ($data = mysql_fetch_array($query)){
+									while ($data = mysqli_fetch_array($query)){
 									?>
                                         <tr class="odd gradeX">
                                             <td style="vertical-align:middle;text-align:right;"><?php echo $no;?></td>

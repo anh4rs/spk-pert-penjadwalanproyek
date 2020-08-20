@@ -16,7 +16,7 @@
                             ID : 
 							<?php
 							$id_basis = $_GET['id'];
-							$query_data = mysql_fetch_array(mysql_query("select * from tbl_basis_aturan where id_basis='$id_basis'"));
+							$query_data = mysqli_fetch_array(mysqli_query($con, "select * from tbl_basis_aturan where id_basis='$id_basis'"));
 							$id_basis = $query_data['id_basis'];
 							echo $id_basis;?>
 							</td>
@@ -33,10 +33,10 @@
 							<label class="control-label col-lg-4">NAMA KEGIATAN UTAMA</label>
 							<div class="col-lg-8">
 								<select class="form-control chzn-select" name="kode_kegiatan">
-									<?php $query_data_kegiatan = mysql_fetch_array(mysql_query("select * from tbl_kegiatan where kode_kegiatan='$query_data[kode_kegiatan]'"));?>
+									<?php $query_data_kegiatan = mysqli_fetch_array(mysqli_query($con, "select * from tbl_kegiatan where kode_kegiatan='$query_data[kode_kegiatan]'"));?>
 									<option value="<?php echo $query_data_kegiatan['kode_kegiatan'];?>"><?php echo $query_data_kegiatan['nama_kegiatan'];?></option>
-										<?php $query_kegiatan = mysql_query("select * from tbl_kegiatan where kode_kegiatan !='$query_data[kode_kegiatan]' and kode_project='$query_data_kegiatan[kode_project]' order by id_kegiatan ASC");
-										while($data_kegiatan = mysql_fetch_array($query_kegiatan)){
+										<?php $query_kegiatan = mysqli_query($con, "select * from tbl_kegiatan where kode_kegiatan !='$query_data[kode_kegiatan]' and kode_project='$query_data_kegiatan[kode_project]' order by id_kegiatan ASC");
+										while($data_kegiatan = mysqli_fetch_array($query_kegiatan)){
 										?>	
 											<option value="<?php echo $data_kegiatan['kode_kegiatan'];?>"><?php echo $data_kegiatan['nama_kegiatan'];?></option>
 										<?php } ?>
@@ -47,10 +47,10 @@
 							<label class="control-label col-lg-4">KEGIATAN SEBELUM KEGIATAN UTAMA</label>
 							<div class="col-lg-8">
 								<select class="form-control chzn-select" name="kegiatan_sebelumnya">
-									<?php $query_data_kegiatan_sebelumnya = mysql_fetch_array(mysql_query("select * from tbl_kegiatan where kode_kegiatan='$query_data[kegiatan_sebelumnya]'"));?>
+									<?php $query_data_kegiatan_sebelumnya = mysqli_fetch_array(mysqli_query($con, "select * from tbl_kegiatan where kode_kegiatan='$query_data[kegiatan_sebelumnya]'"));?>
 									<option value="<?php echo $query_data_kegiatan_sebelumnya['kode_kegiatan'];?>"><?php echo $query_data_kegiatan_sebelumnya['nama_kegiatan'];?></option>
-										<?php $query_kegiatan = mysql_query("select * from tbl_kegiatan where kode_kegiatan !='$query_data[kegiatan_sebelumnya]' and kode_project='$query_data_kegiatan[kode_project]' order by id_kegiatan ASC");
-										while($data_kegiatan = mysql_fetch_array($query_kegiatan)){
+										<?php $query_kegiatan = mysqli_query($con, "select * from tbl_kegiatan where kode_kegiatan !='$query_data[kegiatan_sebelumnya]' and kode_project='$query_data_kegiatan[kode_project]' order by id_kegiatan ASC");
+										while($data_kegiatan = mysqli_fetch_array($query_kegiatan)){
 										?>	
 											<option value="<?php echo $data_kegiatan['kode_kegiatan'];?>"><?php echo $data_kegiatan['nama_kegiatan'];?></option>
 										<?php } ?>
@@ -61,10 +61,10 @@
 							<label class="control-label col-lg-4">KEGIATAN SETELAH KEGIATAN UTAMA</label>
 							<div class="col-lg-8">
 								<select class="form-control chzn-select" name="kegiatan_setelahnya">
-									<?php $query_data_kegiatan_sebelumnya = mysql_fetch_array(mysql_query("select * from tbl_kegiatan where kode_kegiatan='$query_data[kegiatan_setelahnya]'"));?>
+									<?php $query_data_kegiatan_sebelumnya = mysqli_fetch_array(mysqli_query($con, "select * from tbl_kegiatan where kode_kegiatan='$query_data[kegiatan_setelahnya]'"));?>
 									<option value="<?php echo $query_data_kegiatan_sebelumnya['kode_kegiatan'];?>"><?php echo $query_data_kegiatan_sebelumnya['nama_kegiatan'];?></option>
-										<?php $query_kegiatan = mysql_query("select * from tbl_kegiatan where kode_kegiatan !='$query_data[kegiatan_setelahnya]' and kode_project='$query_data_kegiatan[kode_project]' order by id_kegiatan ASC");
-										while($data_kegiatan = mysql_fetch_array($query_kegiatan)){
+										<?php $query_kegiatan = mysqli_query($con, "select * from tbl_kegiatan where kode_kegiatan !='$query_data[kegiatan_setelahnya]' and kode_project='$query_data_kegiatan[kode_project]' order by id_kegiatan ASC");
+										while($data_kegiatan = mysqli_fetch_array($query_kegiatan)){
 										?>	
 											<option value="<?php echo $data_kegiatan['kode_kegiatan'];?>"><?php echo $data_kegiatan['nama_kegiatan'];?></option>
 										<?php } ?>

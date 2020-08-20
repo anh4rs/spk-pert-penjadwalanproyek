@@ -5,7 +5,7 @@ $updater = $_SESSION['username'];
 	switch($_GET['act']){
 		case 'add':
 			$waktuselesai_perkiraan = round(($_POST['waktuselesai_optimis']+($_POST['waktuselesai_realistis']*4)+$_POST['waktuselesai_pesimis'])/6,2);
-			mysql_query("INSERT INTO tbl_kegiatan SET 
+			mysqli_query($con, "INSERT INTO tbl_kegiatan SET 
 			kode_project				= '$_POST[kode_project]',
 			kode_kegiatan				= '$_POST[kode_kegiatan]',
 			nama_kegiatan				= '$_POST[nama_kegiatan]',
@@ -19,7 +19,7 @@ $updater = $_SESSION['username'];
 		break;
 		case 'edit':
 			$waktuselesai_perkiraan = round(($_POST['waktuselesai_optimis']+($_POST['waktuselesai_realistis']*4)+$_POST['waktuselesai_pesimis'])/6,2);
-			mysql_query("UPDATE tbl_kegiatan SET 
+			mysqli_query($con, "UPDATE tbl_kegiatan SET 
 			kode_project				= '$_POST[kode_project]',
 			nama_kegiatan				= '$_POST[nama_kegiatan]',
 			waktuselesai_optimis		= '$_POST[waktuselesai_optimis]',
@@ -32,7 +32,7 @@ $updater = $_SESSION['username'];
 			echo "<meta http-equiv='refresh' content='0;url=?pert=tbl_kegiatan'>";			
 		break;
 		case 'delete':
-			mysql_query("DELETE FROM tbl_kegiatan WHERE kode_kegiatan = '$_GET[id]'");
+			mysqli_query($con, "DELETE FROM tbl_kegiatan WHERE kode_kegiatan = '$_GET[id]'");
 			echo "<meta http-equiv='refresh' content='0;url=?pert=tbl_kegiatan'>";
 		break;
 	}

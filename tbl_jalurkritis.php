@@ -33,9 +33,9 @@
                                     </thead>
                                     <tbody>
 									<?php 
-									$query = mysql_query("SELECT * FROM tbl_jalurkritis left join tbl_project on tbl_project.kode_project=tbl_jalurkritis.kode_project order by id_jalurkritis ASC");
+									$query = mysqli_query($con, "SELECT * FROM tbl_jalurkritis left join tbl_project on tbl_project.kode_project=tbl_jalurkritis.kode_project order by id_jalurkritis ASC");
 									$no = 1;
-									while ($data = mysql_fetch_array($query)){
+									while ($data = mysqli_fetch_array($query)){
 									?>
                                         <tr class="odd gradeX">
                                             <td><?php echo $no;?></td>
